@@ -9,12 +9,12 @@ library(ggplot2)
 
 # set up data ------------------------------------------------------------------
 
-# dt <- readRDS(here("data", "data-uncompressed.rds"))
-# genes <- unique(dt, by = "gene_name")[ ,gene_name]
-# individuals <- unique(dt, by = "individual")[ ,individual]
-# populations <- unique(dt, by = "ancestry")[ ,ancestry]
-# sexes <- unique(dt, by = "sex")[, sex]
-# metrics <- unique(dt, by = "metric")[, metric]
+dt <- readRDS(here("data", "data.rds"))
+genes <- unique(dt, by = "gene_name")[ ,gene_name]
+individuals <- unique(dt, by = "individual")[ ,individual]
+populations <- unique(dt, by = "population")[ ,population]
+sexes <- unique(dt, by = "sex")[, sex]
+metrics <- unique(dt, by = "metric")[, metric]
 
 
 # set up ui --------------------------------------------------------------------
@@ -98,7 +98,7 @@ server <- function(input, output) {
   d <- reactive({
     dt[.(input$gene, input$metric)
        ][individual %in% input$individuals &
-         ancestry %in% input$populations &
+         population %in% input$populations &
          sex %in% input$sexes
          ][order(-value)]
   })
