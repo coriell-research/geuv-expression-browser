@@ -39,7 +39,6 @@ ui <- fluidPage(
             inputId = "gene",
             label = "Enter Gene Symbol",
             choices = NULL,
-            selected = "BRCA1",
             multiple = FALSE
           ),
           selectInput(
@@ -122,7 +121,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
 
   # create serverside selectize for gene list
-  updateSelectizeInput(session, "gene", choices = genes, server = TRUE)
+  updateSelectizeInput(session, "gene", choices = genes, selected = "BRCA1", server = TRUE)
 
   # set up base reactive table used in most tabsets -----------------
   d <- reactive({
