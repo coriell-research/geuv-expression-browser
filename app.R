@@ -137,12 +137,17 @@ server <- function(input, output, session) {
       arrange(desc(value))
   })
 
-  # # datatable tabset ------------------------------------------------
+  # datatable tabset ------------------------------------------------
   output$table <- DT::renderDataTable({
     d() %>%
       collect() %>%
-      as.data.frame()
-  })
+      as.data.frame() %>% 
+      mutate(individual = paste0('<a href="https://www.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=', individual, '&Product=DNA">', individual, '</a>'),
+             value = round(value, 2))
+  }, 
+  escape = FALSE
+  )
+
   output$downloadData <- downloadHandler(
     filename = function() {
       paste("Coriell-GEUV-", Sys.Date(), ".csv", sep = "")
