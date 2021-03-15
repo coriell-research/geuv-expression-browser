@@ -41,3 +41,15 @@ write_rds(sexes, here("data", "sexes.rds"))
 write_rds(metrics, here("data", "metrics.rds"))
 ```
 
+## Can we create links to repository samples?
+
+```{r}
+data_tbl %>% 
+  filter(metric == "CPM" & gene_name == "PTEN") %>% 
+  collect() %>% 
+  mutate(individual = paste0('<a href="https://www.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=', individual, '&Product=DNA">', individual, '</a>')) %>% 
+  as.data.frame() %>% 
+  select(individual) %>% 
+  DT::datatable(escape = FALSE, )
+```
+
