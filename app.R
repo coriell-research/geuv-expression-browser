@@ -133,8 +133,7 @@ server <- function(input, output, session) {
         individual %in% !!input$individuals,
         population %in% !!input$populations,
         sex %in% !!input$sexes
-      ) %>%
-      arrange(desc(value))
+      )
   })
 
   # datatable tabset ------------------------------------------------
@@ -143,9 +142,10 @@ server <- function(input, output, session) {
       collect() %>%
       as.data.frame() %>% 
       mutate(individual = paste0('<a href="https://www.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=', individual, '&Product=DNA">', individual, '</a>'),
-             value = round(value, 2))
+             value = round(value, 2)) %>% 
+      arrange(desc(value))
   }, 
-  escape = FALSE
+  escape = c('sex', 'population', 'gene_name', 'gene_id', 'seqnames', 'start', 'end', 'width', 'strand', 'gene_type', 'metric', 'value')
   )
 
   output$downloadData <- downloadHandler(
@@ -178,7 +178,7 @@ server <- function(input, output, session) {
   })
 
   output$summary <- renderPrint({
-    summary(d() %>% collect() %>% pull(value))
+    summary(pull(.data = collect(d()), var = value))
   })
 }
 
