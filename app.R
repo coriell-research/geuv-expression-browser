@@ -103,14 +103,7 @@ ui <- fluidPage(
     ),
     tabPanel(
       "About",
-      h2("Data Collection"),
-      p("Data was downloaded from GEUVADIS..."),
-      hr(),
-      h2("Data Processing"),
-      p("EdgeR was used to..."),
-      hr(),
-      h2("Definitions"),
-      p("Counts Per Million (CPM)...")
+      includeMarkdown(here("doc", "about.md"))
     )
   )
 )
