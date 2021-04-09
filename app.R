@@ -17,11 +17,7 @@ pool <- dbPool(
 )
 
 # Read in input selections
-genes <- readRDS(here("data", "genes.rds"))
-individuals <- readRDS(here("data", "individuals.rds"))
-populations <- readRDS(here("data", "populations.rds"))
-sexes <- readRDS(here("data", "sexes.rds"))
-metrics <- readRDS(here("data", "metrics.rds"))
+load(here("data", "input-selections.RData"))
 
 # set up ui --------------------------------------------------------------------
 
