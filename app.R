@@ -1,5 +1,6 @@
 library(shiny)
 library(shinythemes)
+library(shinyWidgets)
 library(pool)
 
 library(forcats)
@@ -37,13 +38,12 @@ ui <- fluidPage(
             choices = NULL,
             multiple = FALSE
           ),
-          selectInput(
+          pickerInput(
             inputId = "individuals",
             label = "Individual(s)",
             choices = individuals,
             selected = individuals,
-            size = 10,
-            selectize = FALSE,
+            options = list(`actions-box` = TRUE, size = 10),
             multiple = TRUE
           ),
           checkboxGroupInput(
